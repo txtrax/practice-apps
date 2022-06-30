@@ -27,10 +27,11 @@ app.post('/words', (req, res) => {
 
 app.get('/words', (req, res) => {
   //this works
+  console.log('made it to server get')
   db.read()
     .then(results => {
       console.log('line 24', results);
-      res.end();
+      res.status(200).send(results);
     })
     .catch(err => {
       console.log('error retrieving from db')
