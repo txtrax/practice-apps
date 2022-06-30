@@ -7,22 +7,20 @@ const app = express();
 
 // Serves up all static and generated assets in ../client/dist.
 app.use(express.static(path.join(__dirname, "../client/dist")));
-app.use(express.json());
+
+app.use(express.json()); //needs headers
 
 //CRUD
 app.post('/words', (req, res) => {
-  console.log('made it in post', req.body)
-
-  // this does not complete?
+  // this does not complete? why...
   db.create(req.body)
-    .then(results => {
-      console.log('success in server post')
-      res.end();
+    .then(() => {
+      res.send(201).end()
     })
     .catch(err => {
-      console.log('error in server post');
-      res.end();
+      res.send(500).end()
     })
+
 })
 
 app.get('/words', (req, res) => {

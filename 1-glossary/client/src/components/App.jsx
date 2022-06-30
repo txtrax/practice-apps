@@ -30,10 +30,7 @@ class App extends React.Component {
   getWords() {
     console.log('in getWords')
 
-    axios({
-      method: 'GET',
-      url: '/words'
-    })
+    axios.get('/words')
       .then((results) => {
         this.setState({list: results.data});
       })
@@ -43,10 +40,10 @@ class App extends React.Component {
   }
 
   onAdd(obj) {
-    let { list } = this.state;
-    obj._id = list.length + 1;
+    // let { list } = this.state;
+    // obj._id = list.length + 1;
 
-    this.setState({list: [...dummyData, obj]})
+    // this.setState({list: [...dummyData, obj]})
   }
 
   render() {

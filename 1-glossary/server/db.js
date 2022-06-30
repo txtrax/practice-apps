@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost/glossary');
 // 2. Set up any schema and models needed by the app
 let wordSchema = new mongoose.Schema({
   word: {type: String, unique: true, required: true},
-  definition: String,
+  description: String,
   italicized: Boolean,
   private: Boolean
 });
@@ -24,16 +24,20 @@ let create = (obj) => {
 
   let newEntry = new Word({
     word: obj.word,
-    definition: obj.description,
+    description: obj.description,
     italicized: obj.italicized,
     private: obj.private
   })
 
-  newEntry.save()
+  return newEntry.save()
+    .then(() => {
+      console.log('success saving to db');
+    })
     .catch(err => {
       console.log('error saving entries')
     })
 }
+// create(dummyData)
 
 let read = () => {
   return Word.find()
